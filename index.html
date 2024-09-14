@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock and date</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+        body {
+            font-family: "Luckiest Guy", cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image: radial-gradient(circle, #2660c7, #2b65c7, #3069c6, #366ec5, #3c72c4, #3b80ca, #418dce, #4d9ad1, #68b3d8, #8bcade, #b4e0e6, #ddf5f4);
+        }
+        
+        #digitalClock {
+            font-size: 4em;
+            color: #ffee00;
+        }
+        
+        .colon {
+            color: #ffee00;
+        }
+        
+        #calendar {
+            margin-top: 10px;
+            font-size: 1.5em;
+            color: #ffee00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="digitalClock"></div>
+    <div id="calendar"></div>
+
+    <script>
+        function updateDigitalClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}<span class="colon">:</span>${minutes}<span class="colon">:</span>${seconds}`;
+
+            const digitalClock = document.getElementById('digitalClock');
+            digitalClock.innerHTML = currentTime;
+        }
+
+        function updateCalendar() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            const currentCalendarDate = now.toLocaleDateString('en-US', options);
+
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = currentCalendarDate;
+        }
+
+        setInterval(updateDigitalClock, 1000);
+        updateDigitalClock();
+        updateCalendar();
+    </script>
+
+</body>
+
+</html>
